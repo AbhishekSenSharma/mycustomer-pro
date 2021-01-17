@@ -1,0 +1,29 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let customer of Customers">
+    <mat-expansion-panel-header class="primary">
+      <mat-panel-title>
+        <span class="text-bold mr-3">Customer :  </span> {{customer.name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list *ngFor="let item of customer.products">
+      <mat-list-item>
+        <div class="wd-100" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="12px">
+          <span fxFlex="30%">
+            <mat-label class="text-bold mr-3"> Name:  </mat-label>
+            <span>{{item.name}}</span>
+         </span>
+          <span fxFlex="40%">
+            <mat-label class="text-bold mr-3"> Description:  </mat-label>
+            <span>{{item.description}}</span>
+          </span>
+          <span fxFlex="30%">
+            <mat-label class="text-bold mr-3"> Price:  </mat-label>
+            <span>{{item.price}}</span>
+          </span>
+          </div>
+
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>

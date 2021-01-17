@@ -1,0 +1,99 @@
+<mat-card *ngIf="form">
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveCustomer()" *ngIf="!isLoading">
+
+    <div class="image-preview" (click)="filePicker.click()"
+      *ngIf="imagePreview !== '' && imagePreview && (mode === 'edit' ||form.get('image').valid) ; else preview">
+      <img [src]="imagePreview" [alt]="form.value.title">
+    </div>
+    <ng-template #preview>
+      <div class="image-preview" (click)="filePicker.click()">
+        <img [src]="uploadImage" alt="upload image">
+      </div>
+  </ng-template>
+
+    <div>
+      <!-- <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button> -->
+      <input type="file" #filePicker (change)="onImagePicked($event)">
+    </div>
+
+    <div class="wd-100" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="12px">
+      <span fxFlex="50%">
+        <mat-form-field>
+          <input matInput type="text" formControlName="name" placeholder="Name">
+          <mat-error *ngIf="form.get('name').invalid">Please enter a name.</mat-error>
+        </mat-form-field>
+      </span>
+      <span fxFlex="50%">
+        <mat-form-field>
+          <input matInput type="text" formControlName="email" placeholder="Email">
+          <mat-error *ngIf="form.get('email').invalid">Please enter a valid email.</mat-error>
+        </mat-form-field>
+      </span>
+    </div>
+
+    <mat-form-field>
+      <textarea matInput rows="4" formControlName="address" placeholder="Address"></textarea>
+      <mat-error *ngIf="form.get('address').invalid">Please enter a address.</mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="12px">
+      <span fxFlex="40%">
+
+        <mat-form-field>
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country" (selectionChange)="onCountryChange($event)">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let country of countries" [value]="country.country_name">
+              {{country.country_name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('country').hasError('required')">Please choose a country</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state" (selectionChange)="onStateChange($event)">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let state of states" [value]="state.state_name">
+              {{state.state_name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('state').hasError('required')">Please choose a state</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" placeholder="City" aria-label="City" matInput formControlName="city"
+            [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of cities" [value]="option.city_name">
+              {{option.city_name}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="form.get('city').invalid">Please enter a city.</mat-error>
+        </mat-form-field>
+
+      </span>
+      <span fxFlex="30%" layout-align="center center">
+
+        <app-checkbox-list controlName="hobbies" label="Hobbies" [form]="form" [items]="hobbiesList"
+          [value]="hobbisetValues"></app-checkbox-list>
+
+      </span>
+
+      <span fxFlex="30%">
+
+        <app-checkbox-list [isObject]="true" controlName="products" label="Products" [form]="form" *ngIf="products"
+          [items]="products" [value]="productsSetValues"></app-checkbox-list>
+
+      </span>
+
+    </div>
+
+
+    <button mat-raised-button color="accent" type="submit">Save Customer</button>
+
+  </form>
+
+</mat-card>

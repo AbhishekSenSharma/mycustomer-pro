@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+body { margin: 0; }
+html,body{
+  height:100%;
+}
+.wd-100 {
+  width:100%;
+}
+.text-bold {
+  font-weight: bold;
+  color:#2b2929;
+}
+.text-uppercase {
+  text-transform:uppercase;
+}
+.primary {
+  background-color:#3f51b5;
+  color:white;
+}
+.primary:hover {
+  background-color:#3f51b5 !important;
+  color:white;
+}
+.mat-expansion-panel-header-title{
+  color:white;
+}
+.mr-3 {
+  margin-right: 1rem;
+}
+.mat-card.login-card {
+  display: flex;
+  height:100%;
+  align-items: center;
+  justify-content: center;
+}
+form{
+  flex: 0 0 rem;
+}
+main{
+  height:70%;
+}

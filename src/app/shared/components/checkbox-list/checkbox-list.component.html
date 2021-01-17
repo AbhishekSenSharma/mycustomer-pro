@@ -1,0 +1,13 @@
+<div [formGroup]="form">
+  <mat-label>{{label}}</mat-label>
+  <div *ngFor="let interest of items; let i = index">
+    <mat-checkbox *ngIf="!isObject"(change)="onChange($event)" [value]="interest" [checked]="checkedArray[i]">
+      {{interest}}
+    </mat-checkbox>
+
+    <mat-checkbox *ngIf="isObject"(change)="onChange($event)" [value]="interest._id" [checked]="checkedArray[i]">
+      {{interest.name}}
+    </mat-checkbox>
+
+  </div>
+</div>
