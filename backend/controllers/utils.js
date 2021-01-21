@@ -20,7 +20,6 @@ getToken=()=>{
   return request(options)
     .then((token) => {
       authkey = JSON.parse(token).auth_token;
-      console.log(authkey);
       return authkey
 
     })

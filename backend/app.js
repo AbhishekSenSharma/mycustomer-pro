@@ -1,6 +1,5 @@
 const path = require("path");
 const logger = require("./utils/logger");
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");

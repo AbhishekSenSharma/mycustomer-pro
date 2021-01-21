@@ -2,8 +2,6 @@ const express = require("express");
 
 const UtilController = require("../controllers/utils");
 
-const checkAuth = require("../middleware/check-auth");
-
 const router = express.Router();
 
 router.get("/countries", UtilController.getCountries);

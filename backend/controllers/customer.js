@@ -71,33 +71,6 @@ exports.updatePost = (req, res, next) => {
     });
 };
 
-exports.getPosts = (req, res, next) => {
-  const pageSize = +req.query.pagesize;
-  const currentPage = +req.query.page;
-  const postQuery = Customer.find();
-  let fetchedPosts;
-  if (pageSize && currentPage) {
-    postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
-  }
-  postQuery
-    .then(documents => {
-      fetchedPosts = documents;
-      return Customer.count();
-    })
-    .then(count => {
-      res.status(200).json({
-        message: "Posts fetched successfully!",
-        posts: fetchedPosts,
-        maxPosts: count
-      });
-    })
-    .catch(error => {
-    next(new GeneralError("Fetching posts failed!"));
-      // res.status(500).json({
-      //   message: "Fetching posts failed!"
-      // });
-    });
-};
 exports.getCustomers = (req,res) =>{
   const filter = req.query.filter;
   const sort = req.query.sortOrder === "asc"?1:-1;
@@ -138,9 +111,6 @@ exports.getPost = (req, res, next) => {
       }
     })
     .catch(error => {
-      // res.status(500).json({
-      //   message: "Fetching post failed!"
-      // });
      next(new GeneralError("Fetching post failed!"));
     });
 };
@@ -148,7 +118,6 @@ exports.getPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   Customer.deleteOne({ _id: req.params.id, creator: req.userData.userId })
     .then(result => {
-      console.log(result);
       if (result.n > 0) {
         res.status(200).json({ message: "Deletion successful!" });
       } else {

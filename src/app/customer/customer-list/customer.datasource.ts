@@ -41,7 +41,6 @@ export class CustomerDataSource implements DataSource<Customer> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<Customer[]> {
-    console.log("Connecting data source");
     return this.customersSubject.asObservable();
   }
 

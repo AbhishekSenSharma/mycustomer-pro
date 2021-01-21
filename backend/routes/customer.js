@@ -11,9 +11,9 @@ router.post("", checkAuth, extractFile, CustomerController.createPost);
 
 router.put("/:id", checkAuth, extractFile, CustomerController.updatePost);
 
-router.get("", checkAuth,CustomerController.getCustomers);
+router.get("",CustomerController.getCustomers);
 
-router.get("/:id", CustomerController.getPost);
+// router.get("/:id", CustomerController.getPost);
 
 router.delete("/:id", checkAuth, CustomerController.deletePost);
 
